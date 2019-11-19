@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.zlt</groupId>
 		<artifactId>central-platform</artifactId>
-		<version>2.7.1</version>
+		<version>3.0.0</version>
 	</parent>
 	<artifactId>zlt-uaa</artifactId>
 	<description>认证中心</description>
@@ -12,6 +12,10 @@
 		<dependency>
 			<groupId>com.zlt</groupId>
 			<artifactId>zlt-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.zlt</groupId>
+			<artifactId>zlt-common-spring-boot-starter</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.zlt</groupId>
@@ -32,6 +36,10 @@
 		<dependency>
 			<groupId>com.zlt</groupId>
 			<artifactId>zlt-sentinel-spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.zlt</groupId>
+			<artifactId>zlt-redis-spring-boot-starter</artifactId>
 		</dependency>
 
 		<dependency>
