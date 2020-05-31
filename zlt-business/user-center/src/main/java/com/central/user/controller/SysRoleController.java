@@ -1,5 +1,6 @@
 package com.central.user.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
@@ -43,13 +44,24 @@ public class SysRoleController {
     }
 
     /**
+     * 用户管理查询所有角色
+     * @return
+     */
+    @ApiOperation(value = "后台管理查询角色")
+    @GetMapping("/allRoles")
+    public Result<List<SysRole>> findAll() {
+        List<SysRole> result = sysRoleService.findAll();
+        return Result.succeed(result);
+    }
+
+    /**
      * 角色新增或者更新
      *
      * @param sysRole
      * @return
      */
     @PostMapping("/roles/saveOrUpdate")
-    public Result saveOrUpdate(@RequestBody SysRole sysRole) {
+    public Result saveOrUpdate(@RequestBody SysRole sysRole) throws Exception {
         return sysRoleService.saveOrUpdateRole(sysRole);
     }
 

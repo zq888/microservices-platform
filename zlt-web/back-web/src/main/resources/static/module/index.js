@@ -213,11 +213,27 @@ layui.define(['config', 'admin', 'layer', 'laytpl', 'element', 'form'], function
             // 退出登录
             $('#btnLogout').click(function () {
                 layer.confirm('确定退出登录？', function () {
-                    //通过认证中心 tuic
-                    admin.req('api-uaa/oauth/remove/token', {}, function (data) {
-                            config.removeToken();
-                            location.replace('login.html');
-                    }, 'POST');
+                    let token = config.getToken();
+                    let isExistsToken = false;
+                    if (token) {
+                        let accessToken = token.access_token;
+                        config.removeToken();
+
+                        if (accessToken) {
+                            isExistsToken = true;
+                            admin.req('api-uaa/oauth/check_token?token='+accessToken, {}, function (data) {
+                                if (data.active) {
+                                    let loginPageUrl = window.location.protocol + '//' + window.location.host + '/login.html';
+                                    window.location = config.base_server + 'api-uaa/oauth/remove/token?redirect_uri='+loginPageUrl+'&access_token='+accessToken;
+                                } else {
+                                    location.replace('login.html');
+                                }
+                            }, 'POST');
+                        }
+                    }
+                    if (!isExistsToken) {
+                        location.replace('login.html');
+                    }
                 });
             });
             // 修改密码
